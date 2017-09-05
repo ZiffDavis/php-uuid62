@@ -1,0 +1,12 @@
+{
+    "require": {
+        "phpunit/phpunit": "^6.3",
+        "ramsey/uuid": "^3.7",
+        "tuupola/base62": "^0.8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "ZiffDavis\\": "src/"
+        }
+    }
+}
