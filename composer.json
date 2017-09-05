@@ -1,4 +1,12 @@
 {
+    "name": "ziffdavis/uuid62",
+    "description": "Generate Base-62 encoded UUID strings",
+    "authors": [
+        {
+            "name": "Josh Butts",
+            "email": "josh@joshbutts.com"
+        }
+    ],
     "require": {
         "phpunit/phpunit": "^6.3",
         "ramsey/uuid": "^3.7",
