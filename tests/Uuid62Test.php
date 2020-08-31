@@ -23,4 +23,13 @@ class Uuid62Test extends \PHPUnit\Framework\TestCase
         $uuid = \ZiffDavis\Uuid62::toUuid($testUuidEncoded);
         $this->assertEquals($testUuid, $uuid->toString());
     }
+
+    public function testValid()
+    {
+        $testUuidEncoded = "01tsz7Nk9Grmziqc5gFI0pY";
+        $this->assertTrue(\ZiffDavis\Uuid62::valid($testUuidEncoded));
+        $this->assertFalse(\ZiffDavis\Uuid62::valid(""));
+        $this->assertFalse(\ZiffDavis\Uuid62::valid(null));
+        $this->assertFalse(\ZiffDavis\Uuid62::valid(123456789));
+    }
 }

@@ -19,6 +19,9 @@ class Uuid62
 
     public static function toUuid(string $base62UuidString): UuidInterface
     {
+        if (substr($base62UuidString, 0, 1) == "0") {
+            $base62UuidString = substr($base62UuidString, 1);
+        }
         $encoder = new Base62(["characters" => Base62::INVERTED]);
         return Uuid::fromBytes($encoder->decode($base62UuidString));
     }
@@ -26,5 +29,17 @@ class Uuid62
     public static function new($pad = true): string
     {
         return self::fromUuid(Uuid::uuid4(), $pad);
+    }
+
+    public static function valid($uuid62)
+    {
+        try {
+            if (strlen($uuid62) == 23) {
+                $uuid = self::toUuid($uuid62);
+                return Uuid::isValid($uuid->toString());
+            }
+        } catch (\Exception $e) {
+        }
+        return false;
     }
 }
