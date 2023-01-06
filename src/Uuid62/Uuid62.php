@@ -1,5 +1,5 @@
 <?php
-namespace ZiffDavis;
+namespace ZiffDavis\Uuid62;
 
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -31,7 +31,7 @@ class Uuid62
         return self::fromUuid(Uuid::uuid4(), $pad);
     }
 
-    public static function valid($uuid62)
+    public static function valid(string $uuid62)
     {
         try {
             if (strlen($uuid62) == 23) {
