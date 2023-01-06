@@ -19,5 +19,12 @@
         "psr-4": {
             "ZiffDavis\\": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "\\ZiffDavis\\Uuid62\\Providers\\Uuid62Provider"
+            ]
+        }
     }
 }
