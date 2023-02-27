@@ -1,6 +1,7 @@
 <?php
 namespace ZiffDavis\Uuid62;
 
+use Ramsey\Uuid\Exception\InvalidArgumentException;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Tuupola\Base62;
@@ -19,11 +20,16 @@ class Uuid62
 
     public static function toUuid(string $base62UuidString): UuidInterface
     {
-        if (substr($base62UuidString, 0, 1) == "0") {
-            $base62UuidString = substr($base62UuidString, 1);
-        }
         $encoder = new Base62(["characters" => Base62::INVERTED]);
-        return Uuid::fromBytes($encoder->decode($base62UuidString));
+        do {
+            $decoded = $encoder->decode($base62UuidString);
+            try {
+                return Uuid::fromBytes($decoded);
+            } catch (InvalidArgumentException $e) {
+                $base62UuidString = substr($base62UuidString, 1);
+            }
+        } while (strlen($decoded) > 0);
+        throw new \InvalidArgumentException("Could not successfully decode 16 byes from base62 string");
     }
 
     public static function new($pad = true): string

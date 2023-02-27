@@ -25,6 +25,14 @@ class Uuid62Test extends \PHPUnit\Framework\TestCase
         $this->assertEquals($testUuid, $uuid->toString());
     }
 
+    public function testToUuidWithDoubleZeroes()
+    {
+        $encoded = '00GoD7ZDJnk5iokn3mDQDRT';
+        $uuid = Uuid62::toUuid($encoded);
+        $this->assertInstanceOf(\Ramsey\Uuid\UuidInterface::class, $uuid);
+        $this->assertEquals(true, Uuid62::valid($encoded));
+    }
+
     public function testValid()
     {
         $testUuidEncoded = "01tsz7Nk9Grmziqc5gFI0pY";
